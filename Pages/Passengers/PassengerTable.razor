@@ -1,0 +1,25 @@
+@inject PassengerHttpClient http
+
+<Table TEntity="Passenger" HttpClient="http">
+    <Title>
+        Passengers
+    </Title>
+
+    <ColumnGroup>
+        <col style="width: 50%;" />
+        <col style="width: 50%;" />
+    </ColumnGroup>
+
+    <HeaderDefinition>
+        <MudTh>Name</MudTh>
+        <MudTh>Trips</MudTh>
+    </HeaderDefinition>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+
+        <MudTd DataLabel="Name">@context.Trips</MudTd>
+    </RowTemplate>
+
+
+</Table>
