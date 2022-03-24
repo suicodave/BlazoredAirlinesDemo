@@ -4,18 +4,32 @@
     <Title> Passengers </Title>
 
     <ColumnGroup>
-        <col style="width: 50%" />
-        <col style="width: 50%" />
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
     </ColumnGroup>
 
+
     <HeaderDefinition>
+        <MudTh>Id</MudTh>
         <MudTh>Name</MudTh>
         <MudTh>Trips</MudTh>
+        <MudTh>Airline</MudTh>
+        <MudTh>Airline Logo</MudTh>
     </HeaderDefinition>
 
     <RowTemplate>
+        <MudTd DataLabel="Id">@context._Id</MudTd>
+
         <MudTd DataLabel="Name">@context.Name</MudTd>
 
-        <MudTd DataLabel="Name">@context.Trips</MudTd>
+        <MudTd DataLabel="Trips">@context.Trips</MudTd>
+
+        <MudTd DataLabel="Airline">@context.Airline.ElementAt(0)?.Name</MudTd>
+
+        <MudTd DataLabel="Airline Logo">
+            <MudAvatar Image="@context.Airline.ElementAt(0)?.Logo" />
+        </MudTd>
     </RowTemplate>
 </Table>
