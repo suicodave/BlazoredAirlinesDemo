@@ -1,13 +1,11 @@
 @inject PassengerHttpClient http
 
 <Table TEntity="Passenger" HttpClient="http">
-    <Title>
-        Passengers
-    </Title>
+    <Title> Passengers </Title>
 
     <ColumnGroup>
-        <col style="width: 50%;" />
-        <col style="width: 50%;" />
+        <col style="width: 50%" />
+        <col style="width: 50%" />
     </ColumnGroup>
 
     <HeaderDefinition>
@@ -20,6 +18,4 @@
 
         <MudTd DataLabel="Name">@context.Trips</MudTd>
     </RowTemplate>
-
-
 </Table>

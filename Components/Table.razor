@@ -1,8 +1,6 @@
 @typeparam TEntity where TEntity:class
 
 
-
-
 <MudTable Items="@Items" Hover="true" SortLabel="Sort By" Elevation="1" Class="rounded-lg" Virtualize="true"
     Height="350px" FixedHeader="true" ServerData="OnTableChange" @ref="table">
     <ColGroup>
@@ -51,7 +49,9 @@
             <MudTablePager />
         }
 
+
     </PagerContent>
+
 </MudTable>
 
 
@@ -87,9 +87,11 @@
 
     private Func<TableState, Task<TableData<TEntity>>> OnTableChange => new(LoadData);
 
+
     private void Refresh()
     {
         table.ReloadServerData();
     }
+
 
 }
