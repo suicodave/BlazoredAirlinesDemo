@@ -1,8 +1,10 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider IsDarkMode="@true" />
 <MudDialogProvider />
 <MudSnackbarProvider />
+
+
 
 <MudLayout>
     <MudAppBar Elevation="0">
@@ -16,22 +18,29 @@
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Variant="@DrawerVariant.Temporary" Elevation="1">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6">BlazoredAirlinesDemo</MudText>
+            <MudText Typo="Typo.h6">Blazored Airlines</MudText>
         </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
             @Body
+
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 @code {
-    bool _drawerOpen = true;
+    bool _drawerOpen = false;
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
+
+
+
+
+
+
 }
