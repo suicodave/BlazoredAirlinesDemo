@@ -1,41 +1,55 @@
 @inject ILogger<CreatePassengerDialog> Logger
+@inject PassengerHttpClient Http
 
-<MudDialog>
-    <DialogContent>
-        <MudGrid>
-            <MudItem xs="12">
-                <MudTextField T="string" Label="Name" Variant="Variant.Outlined"></MudTextField>
-            </MudItem>
+<EditForm Model="@Model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-            <MudItem xs="6">
-                <MudTextField T="int" Label="Trips" Variant="Variant.Outlined"></MudTextField>
-            </MudItem>
+    <MudDialog>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="@Model.Name" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                </MudItem>
 
-            <MudItem xs="6">
-                <MudTextField T="int" Value="0" Label="Airline Id" Variant="Variant.Outlined"></MudTextField>
-            </MudItem>
-        </MudGrid>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="@Model.Trips" Label="Trips" Variant="Variant.Outlined"></MudTextField>
+                </MudItem>
 
-    </DialogContent>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="@Model.Airline" Label="Airline Id" Variant="Variant.Outlined">
+                    </MudTextField>
+                </MudItem>
+            </MudGrid>
 
-    <DialogActions>
-        <div class="my-4 mr-4">
-            <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
-            <MudButton OnClick="Cancel">Cancel</MudButton>
-        </div>
-    </DialogActions>
+        </DialogContent>
 
-</MudDialog>
+        <DialogActions>
+            <div class="my-4 mr-4">
+                <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
+                <MudButton OnClick="Cancel">Cancel</MudButton>
+            </div>
+        </DialogActions>
+
+    </MudDialog>
+</EditForm>
+
 
 
 @code {
     [CascadingParameter]
     public MudDialogInstance Dialog { get; set; }
 
+    private CreatePassengerRequest Model = new();
+
     void Cancel() => Dialog.Cancel();
 
-    void Submit()
+    async Task<int> Submit()
     {
-        Logger.LogInformation("Submitted");
+        var result = await Http.Create(Model);
+
+        Dialog.Close(DialogResult.Ok(result));
+
+        return 1;
     }
 }

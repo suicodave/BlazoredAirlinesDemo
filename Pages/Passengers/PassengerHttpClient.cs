@@ -37,5 +37,10 @@ namespace BlazoredAirlinesDemo.Pages.Passengers
                 TotalItems = result.TotalPassengers
             };
         }
+
+        public async Task<int> Create(CreatePassengerRequest request)
+        {
+            return (int)(await _http.PostAsJsonAsync("v1/passenger", request)).StatusCode;
+        }
     }
 }

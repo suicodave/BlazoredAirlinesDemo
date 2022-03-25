@@ -27,4 +27,14 @@ namespace BlazoredAirlinesDemo.Pages.Passengers
         public IEnumerable<Passenger> Data { get; set; } = new List<Passenger>();
     }
 
+    public class CreatePassengerRequest
+    {
+        public string Name { get; set; }
+
+        public int Trips { get; set; }
+
+        public int Airline { get; set; }
+
+    }
+
 }
