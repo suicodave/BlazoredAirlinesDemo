@@ -1,6 +1,8 @@
 @inject PassengerHttpClient http
+@inject ILogger<PassengerTable> logger
+@inject IDialogService DialogService
 
-<Table TEntity="Passenger" HttpClient="http">
+<Table TEntity="Passenger" HttpClient="http" OnCreate="Create">
     <Title> Passengers </Title>
 
     <ColumnGroup>
@@ -33,3 +35,18 @@
         </MudTd>
     </RowTemplate>
 </Table>
+
+@code {
+
+    public void Create()
+    {
+        var options = new DialogOptions
+        {
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true
+        };
+
+        DialogService.Show<CreatePassengerDialog>("Create Passenger", options);
+    }
+
+}

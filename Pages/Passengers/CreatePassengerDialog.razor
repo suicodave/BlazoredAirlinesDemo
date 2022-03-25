@@ -1,0 +1,41 @@
+@inject ILogger<CreatePassengerDialog> Logger
+
+<MudDialog>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs="12">
+                <MudTextField T="string" Label="Name" Variant="Variant.Outlined"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudTextField T="int" Label="Trips" Variant="Variant.Outlined"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudTextField T="int" Value="0" Label="Airline Id" Variant="Variant.Outlined"></MudTextField>
+            </MudItem>
+        </MudGrid>
+
+    </DialogContent>
+
+    <DialogActions>
+        <div class="my-4 mr-4">
+            <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+        </div>
+    </DialogActions>
+
+</MudDialog>
+
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance Dialog { get; set; }
+
+    void Cancel() => Dialog.Cancel();
+
+    void Submit()
+    {
+        Logger.LogInformation("Submitted");
+    }
+}
