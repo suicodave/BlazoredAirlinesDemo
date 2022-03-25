@@ -38,9 +38,9 @@ namespace BlazoredAirlinesDemo.Pages.Passengers
             };
         }
 
-        public async Task<int> Create(CreatePassengerRequest request)
+        public async Task<bool> Create(CreatePassengerRequest request)
         {
-            return (int)(await _http.PostAsJsonAsync("v1/passenger", request)).StatusCode;
+            return (bool)(await _http.PostAsJsonAsync("v1/passenger", request)).IsSuccessStatusCode;
         }
     }
 }

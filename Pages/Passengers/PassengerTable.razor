@@ -1,6 +1,7 @@
 @inject PassengerHttpClient http
 @inject ILogger<PassengerTable> logger
 @inject IDialogService DialogService
+@inject ISnackbar Snackbar
 
 <Table TEntity="Passenger" HttpClient="http" OnCreate="Create">
     <Title> Passengers </Title>
@@ -38,7 +39,7 @@
 
 @code {
 
-    public void Create()
+    public async Task Create()
     {
         var options = new DialogOptions
         {
@@ -46,7 +47,16 @@
             FullWidth = true
         };
 
-        DialogService.Show<CreatePassengerDialog>("Create Passenger", options);
+        var dialog = DialogService.Show<CreatePassengerDialog>("Create Passenger", options);
+
+        bool status = (bool)(await dialog.Result).Data;
+
+        if (status)
+        {
+            Snackbar.Add("Successfully Created!", Severity.Success);
+        }
+
+        return ;
     }
 
 }

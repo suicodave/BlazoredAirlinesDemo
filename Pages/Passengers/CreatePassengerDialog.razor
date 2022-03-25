@@ -26,8 +26,20 @@
 
         <DialogActions>
             <div class="my-4 mr-4">
-                <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
-                <MudButton OnClick="Cancel">Cancel</MudButton>
+                <MudButton Color="Color.Primary" OnClick="Submit" Disabled="@_isSending">
+                    @if (_isSending)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Saving</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Save</MudText>
+                    }
+                </MudButton>
+                <MudButton OnClick="Cancel">
+                    <MudText>Close</MudText>
+                </MudButton>
             </div>
         </DialogActions>
 
@@ -40,15 +52,22 @@
     [CascadingParameter]
     public MudDialogInstance Dialog { get; set; }
 
+    private bool _isSending = false;
+
     private CreatePassengerRequest Model = new();
 
     void Cancel() => Dialog.Cancel();
 
+
     async Task<int> Submit()
     {
+        _isSending = true;
+
         var result = await Http.Create(Model);
 
-        Dialog.Close(DialogResult.Ok(result));
+        _isSending = false;
+
+        Dialog.Close(DialogResult.Ok<bool>(result));
 
         return 1;
     }
