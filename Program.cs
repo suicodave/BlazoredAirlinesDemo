@@ -14,7 +14,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 
 builder.Services.AddHttpClient<PassengerHttpClient>(client =>
-    client.BaseAddress = new Uri("https://api.instantwebtools.net"));
+    client.BaseAddress = new Uri(builder.Configuration["PassengerApi"]));
 
 
 
